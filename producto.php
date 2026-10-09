@@ -17,10 +17,24 @@ if (!$producto || !$producto['activo']) {
     exit;
 }
 
-// 4. Si existe, mostrar el detalle
+// 4. Si se envió el formulario de comentario (POST a esta misma página)...
+//    SIMULADO: en el Parcial 1 no hay base de datos, así que no se guarda nada.
+//    Solo mostramos el mensaje de éxito. En el Parcial 2 acá se validan los
+//    datos de $_POST y se inserta el comentario con aprobado = 0.
+$alerta = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $alerta = [
+        'tipo'    => 'exito',
+        'mensaje' => '¡Gracias! Tu comentario quedará visible cuando sea aprobado.',
+    ];
+}
+
+// 5. Mostrar el detalle
 vista('publico/producto', [
-    'titulo'      => 'Detalle de producto',
+    'titulo'      => $producto['nombre'],
     'seccion'     => 'productos',
     'producto'    => $producto,
+    'categoria'   => obtener_categoria($producto['categoria_id']),
     'comentarios' => obtener_comentarios($producto['id']),
+    'alerta'      => $alerta,
 ]);
