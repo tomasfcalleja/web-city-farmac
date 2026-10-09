@@ -1,0 +1,8 @@
+# Dependencias de npm (se reinstalan con "npm install")
+node_modules/
+
+# Archivos del sistema operativo y del editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
