@@ -1,0 +1,14 @@
+{
+  "name": "web-city-farmac",
+  "version": "1.0.0",
+  "description": "Template de City Farmac (farmacia y perfumería): sitio público y panel de administración en PHP puro.",
+  "private": true,
+  "scripts": {
+    "dev": "tailwindcss -i ./assets/css/input.css -o ./assets/css/app.css --watch",
+    "build": "tailwindcss -i ./assets/css/input.css -o ./assets/css/app.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

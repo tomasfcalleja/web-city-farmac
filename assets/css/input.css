@@ -1,0 +1,75 @@
+/*
+ * Fuente de estilos de City Farmac (Tailwind CSS v4).
+ * NO se enlaza desde el HTML: se compila a assets/css/app.css con
+ *   npm run build   (o "npm run dev" para recompilar al guardar)
+ */
+@import "tailwindcss";
+
+/* Tokens de diseño: cada --color-x genera clases como bg-x, text-x, border-x */
+@theme {
+    --color-crema: #FAFCFA;
+    --color-menta-50: #EEF7F1;
+    --color-menta-200: #C9E8D4;
+    --color-menta-400: #8FCFA6;
+    --color-bosque-700: #2F6B4F;   /* botones, links y foco */
+    --color-bosque-900: #1E3B2E;   /* títulos */
+    --color-tinta: #2B312E;        /* texto */
+    --color-gris: #5F6B65;         /* texto secundario */
+    --color-borde: #E3EAE5;
+    --color-error: #B4443C;
+
+    --font-sans: "Nunito", system-ui, sans-serif;
+}
+
+/* Estilos base: lo que aplica a todo el sitio sin poner clases */
+@layer base {
+    body {
+        @apply bg-crema font-sans text-tinta antialiased;
+    }
+
+    h1, h2, h3 {
+        @apply font-extrabold text-bosque-900;
+    }
+
+    /* Foco visible en todo lo clickeable (solo al navegar con teclado) */
+    :focus-visible {
+        @apply outline-2 outline-offset-2 outline-bosque-700;
+    }
+}
+
+/*
+ * Clases propias para piezas chicas que se repiten en muchos lugares
+ * (botones y campos de formulario). Las piezas grandes viven en includes/componentes/.
+ */
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-bosque-700 px-5 py-2.5
+               font-bold text-white transition-colors hover:bg-bosque-900;
+    }
+
+    .btn-secundario {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border border-bosque-700 bg-white px-5 py-2.5
+               font-bold text-bosque-700 transition-colors hover:bg-menta-50;
+    }
+
+    .enlace {
+        @apply font-semibold text-bosque-700 underline underline-offset-4 hover:text-bosque-900;
+    }
+
+    .etiqueta {
+        @apply mb-1 block text-sm font-bold text-tinta;
+    }
+
+    .campo {
+        @apply block w-full rounded-xl border border-borde bg-white px-4 py-2.5 text-tinta
+               placeholder:text-gris focus:border-bosque-700;
+    }
+
+    .chip {
+        @apply inline-block rounded-full bg-menta-50 px-3 py-1 text-xs font-bold text-bosque-900;
+    }
+
+    .tarjeta {
+        @apply rounded-2xl border border-borde bg-white p-6;
+    }
+}
