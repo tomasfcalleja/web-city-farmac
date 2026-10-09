@@ -99,12 +99,25 @@ Las URLs son relativas a la ruta base (por ejemplo `http://localhost:8000/`).
 
 | Página | URL | Vista |
 |---|---|---|
-| Inicio | `index.php` | `vistas/publico/index.php` |
-| Listado de productos | `productos.php` | `vistas/publico/productos.php` |
-| Detalle de producto | `producto.php?id=1` (id inexistente → 404) | `vistas/publico/producto.php` |
+| Inicio | `index.php` | `vistas/publico/inicio.php` |
+| Listado de productos | `productos.php` (ver filtros abajo) | `vistas/publico/productos.php` |
+| Detalle de producto | `producto.php?id=1` (id inexistente o producto inactivo → 404) | `vistas/publico/producto.php` |
 | Contacto | `contacto.php` | `vistas/publico/contacto.php` |
 | Página no encontrada | `404.php` | `vistas/publico/404.php` |
 | Componentes (temporal) | `componentes.php` | `vistas/publico/componentes.php` |
+
+**Filtros del listado.** Son parámetros GET opcionales y se pueden combinar:
+
+| Parámetro | Valores | Ejemplo |
+|---|---|---|
+| `categoria` | id de categoría. Si es principal, incluye sus subcategorías | `productos.php?categoria=3` |
+| `marca` | id de marca | `productos.php?marca=4` |
+| `orden` | `destacados` (por defecto), `ranking`, `az`, `za` | `productos.php?categoria=2&orden=ranking` |
+
+Un valor inválido se ignora: `orden=cualquiera` vuelve a `destacados`, y `categoria=abc` significa "sin filtro".
+
+**Formularios simulados.** El comentario del detalle y el formulario de contacto envían por POST a la misma página.
+No guardan nada: solo muestran el mensaje de éxito. En el Parcial 2 se conectan a la base de datos.
 
 ### Panel de administración
 
