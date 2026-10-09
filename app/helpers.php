@@ -18,10 +18,29 @@ function e($texto)
     return htmlspecialchars((string) $texto, ENT_QUOTES, 'UTF-8');
 }
 
+// Formatea un número al estilo argentino (coma decimal, punto de miles). Ej: numero(4.5, 1) → "4,5"
+function numero($numero, $decimales = 0)
+{
+    return number_format($numero, $decimales, ',', '.');
+}
+
 // Formatea un número como precio en pesos argentinos. Ej: 12345.5 → "$ 12.345,50"
 function precio($numero)
 {
-    return '$ ' . number_format($numero, 2, ',', '.');
+    return '$ ' . numero($numero, 2);
+}
+
+// Convierte una fecha de la base (año-mes-día) al formato argentino. Ej: "2026-08-12" → "12/08/2026"
+function fecha($fecha)
+{
+    return date('d/m/Y', strtotime($fecha));
+}
+
+// Oculta parte de un email para mostrarlo en público. Ej: "laura.gomez@mail.com" → "la***@mail.com"
+function ocultar_email($email)
+{
+    $partes = explode('@', $email);
+    return substr($partes[0], 0, 2) . '***@' . ($partes[1] ?? '');
 }
 
 
