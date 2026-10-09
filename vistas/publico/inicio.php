@@ -1,6 +1,12 @@
-<section class="rounded-3xl bg-menta-50 px-6 py-14 text-center sm:px-12 md:py-20">
+<section class="relative isolate overflow-hidden rounded-3xl bg-menta-50 px-6 py-16 text-center sm:px-12 md:py-24">
+    <!-- Foto de fondo decorativa: alt vacío para que los lectores de pantalla la salteen -->
+    <img src="<?= url('assets/img/hero.jpeg') ?>" alt="" width="1472" height="720" fetchpriority="high"
+         class="absolute inset-0 -z-10 size-full object-cover">
+    <!-- Velo claro sobre la foto para que el texto se lea bien en cualquier parte -->
+    <div class="absolute inset-0 -z-10 bg-crema/80" aria-hidden="true"></div>
+
     <h1 class="mx-auto max-w-2xl text-4xl leading-tight md:text-5xl">Tu farmacia y perfumería, cerca de casa</h1>
-    <p class="mx-auto mt-4 max-w-xl text-lg text-gris">Medicamentos, dermocosmética, perfumes y todo para tu cuidado diario, con la atención de siempre.</p>
+    <p class="mx-auto mt-4 max-w-xl text-lg font-semibold text-tinta">Medicamentos, dermocosmética, perfumes y todo para tu cuidado diario, con la atención de siempre.</p>
     <a href="<?= url('productos.php') ?>" class="btn mt-8">Ver productos</a>
 </section>
 

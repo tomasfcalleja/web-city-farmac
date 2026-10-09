@@ -13,8 +13,8 @@
 <article class="mt-8 grid gap-8 md:grid-cols-2 md:gap-12">
     <img src="<?= url('assets/img/productos/' . $producto['imagen']) ?>"
          alt="<?= e($producto['nombre']) ?>"
-         width="400" height="400"
-         class="aspect-square w-full rounded-2xl border border-borde bg-menta-50 object-cover">
+         width="800" height="600"
+         class="aspect-[4/3] w-full rounded-2xl border border-borde bg-menta-50 object-cover">
 
     <div class="flex flex-col gap-4">
         <p class="font-semibold text-gris"><?= e($producto['marca']) ?></p>
