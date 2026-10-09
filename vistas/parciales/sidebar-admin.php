@@ -33,8 +33,7 @@ $menu_panel = [
                 <ul id="menu-panel" class="hidden space-y-1 px-3 pb-4 md:block">
                     <?php foreach ($menu_panel as $clave => $item): ?>
                         <li>
-                            <a href="<?= url($item[1]) ?>"
-                               class="block rounded-xl px-4 py-2 font-semibold hover:bg-menta-50 aria-[current=page]:bg-menta-200 aria-[current=page]:text-bosque-900"
+                            <a href="<?= url($item[1]) ?>" class="item-menu"
                                <?= $clave === $seccion ? 'aria-current="page"' : '' ?>>
                                 <?= e($item[0]) ?>
                             </a>

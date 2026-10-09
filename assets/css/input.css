@@ -72,4 +72,44 @@
     .tarjeta {
         @apply rounded-2xl border border-borde bg-white p-6;
     }
+
+    /* Link de un menú vertical (categorías del listado, menú lateral del panel).
+       El activo lleva aria-current y se resalta con fondo menta. */
+    .item-menu {
+        @apply block rounded-xl px-4 py-2 font-semibold transition-colors hover:bg-menta-50;
+    }
+
+    .item-menu[aria-current] {
+        @apply bg-menta-200 text-bosque-900;
+    }
+
+    /*
+     * Selector de valoración (vistas/componentes/selector-estrellas.php).
+     * HTML: input1 label1 input2 label2 ... input5 label5 (radios ocultos con sr-only).
+     * Se pintan "hasta" la estrella elegida o la que está bajo el mouse:
+     *   input:checked + label           → la estrella elegida
+     *   label:has(~ input:checked)      → las labels ANTERIORES a la elegida
+     *   label:hover / label:has(~ label:hover) → lo mismo, pero con el mouse
+     * Mientras el mouse está encima (:hover) se muestra solo la vista previa.
+     */
+    .estrellas svg {
+        fill: transparent;
+        stroke: var(--color-gris);
+        stroke-width: 1.5;
+        transition: fill 0.15s;
+    }
+
+    .estrellas:not(:hover) input:checked + label svg,
+    .estrellas:not(:hover) label:has(~ input:checked) svg,
+    .estrellas label:hover svg,
+    .estrellas label:has(~ label:hover) svg {
+        fill: var(--color-bosque-700);
+        stroke: var(--color-bosque-700);
+    }
+
+    /* El radio está oculto: el foco del teclado se muestra en su estrella */
+    .estrellas input:focus-visible + label {
+        outline: 2px solid var(--color-bosque-700);
+        outline-offset: 2px;
+    }
 }

@@ -16,7 +16,7 @@
         <?php foreach ($valores as $valor): ?>
             <li class="flex items-center gap-3">
                 <?php include __DIR__ . '/../componentes/ranking.php'; ?>
-                <span class="text-sm text-gris" aria-hidden="true"><?= $valor ?> de 5</span>
+                <span class="text-sm text-gris" aria-hidden="true"><?= numero($valor, 1) ?> de 5</span>
             </li>
         <?php endforeach; ?>
     </ul>
@@ -41,7 +41,7 @@
 </section>
 
 <section class="mt-12" aria-labelledby="titulo-basicos">
-    <h2 id="titulo-basicos" class="text-2xl">Botones, chips y campos</h2>
+    <h2 id="titulo-basicos" class="text-2xl">Botones, chips, campos y selector de valoración</h2>
     <div class="mt-6 flex flex-wrap items-center gap-3">
         <a href="#" class="btn">Botón principal</a>
         <a href="#" class="btn-secundario">Botón secundario</a>
@@ -57,6 +57,7 @@
             <label for="ejemplo-mensaje" class="etiqueta">Mensaje</label>
             <textarea id="ejemplo-mensaje" name="mensaje" class="campo" rows="3" required minlength="10"></textarea>
         </div>
+        <?php include __DIR__ . '/../componentes/selector-estrellas.php'; ?>
         <button type="submit" class="btn">Enviar</button>
     </form>
 </section>
