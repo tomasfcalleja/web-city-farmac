@@ -14,6 +14,16 @@ vista('publico/componentes', [
         ['tipo' => 'error', 'mensaje' => 'Revisá los campos marcados: el precio es obligatorio.'],
         ['tipo' => 'info',  'mensaje' => 'Respondemos de lunes a viernes, dentro de las 48 horas hábiles.'],
     ],
+    'badges'     => [
+        ['activo' => true],
+        ['activo' => false],
+        ['activo' => true,  'si' => 'Aprobado'],
+        ['activo' => false, 'no' => 'Pendiente'],
+    ],
+    'acciones'   => [
+        ['id' => 1, 'accion' => 'inactivar', 'texto' => 'Inactivar', 'etiqueta' => 'Inactivar ejemplo'],
+        ['id' => 1, 'accion' => 'aprobar',   'texto' => 'Aprobar',   'etiqueta' => 'Aprobar ejemplo'],
+    ],
     'vacios'     => [
         ['mensaje' => 'Este producto todavía no tiene comentarios.', 'accion' => null],
         ['mensaje' => 'No hay marcas cargadas.', 'accion' => ['texto' => 'Agregar marca', 'url' => 'admin/marca-form.php']],

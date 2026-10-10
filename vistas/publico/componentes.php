@@ -31,6 +31,18 @@
     </div>
 </section>
 
+<section class="mt-12" aria-labelledby="titulo-panel">
+    <h2 id="titulo-panel" class="text-2xl">Panel: estados y acciones</h2>
+    <div class="mt-6 flex flex-wrap items-center gap-3">
+        <?php foreach ($badges as $badge): ?>
+            <?php include __DIR__ . '/../componentes/badge-estado.php'; ?>
+        <?php endforeach; ?>
+        <?php foreach ($acciones as $accion): ?>
+            <?php include __DIR__ . '/../componentes/boton-accion.php'; ?>
+        <?php endforeach; ?>
+    </div>
+</section>
+
 <section class="mt-12" aria-labelledby="titulo-vacio">
     <h2 id="titulo-vacio" class="text-2xl">Estado vacío</h2>
     <div class="mt-6 grid gap-6 md:grid-cols-2">
