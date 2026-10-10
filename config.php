@@ -39,3 +39,4 @@ require __DIR__ . '/app/modelos/comentarios.php';
 require __DIR__ . '/app/modelos/usuarios.php';
 require __DIR__ . '/app/modelos/perfiles.php';
 require __DIR__ . '/app/modelos/areas.php';
+require __DIR__ . '/app/modelos/secciones.php';
