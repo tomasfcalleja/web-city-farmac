@@ -10,11 +10,7 @@ $producto = obtener_producto($id);
 
 // 3. Si no existe (o está oculto en el sitio), responder 404 y mostrar esa vista
 if (!$producto || !$producto['activo']) {
-    http_response_code(404);
-    vista('publico/404', [
-        'titulo' => 'Página no encontrada',
-    ]);
-    exit;
+    mostrar_404();
 }
 
 // 4. Si se envió el formulario de comentario (POST a esta misma página)...

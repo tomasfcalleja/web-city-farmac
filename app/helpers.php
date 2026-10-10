@@ -43,6 +43,13 @@ function ocultar_email($email)
     return substr($partes[0], 0, 2) . '***@' . ($partes[1] ?? '');
 }
 
+// Acorta un texto largo y agrega "…". Ej: recortar('Me cambió la piel en dos semanas', 15) → "Me cambió la p…"
+// (mb_ cuenta letras y no bytes, así no se corta una "á" por la mitad)
+function recortar($texto, $largo)
+{
+    return mb_strlen($texto) > $largo ? rtrim(mb_substr($texto, 0, $largo)) . '…' : $texto;
+}
+
 
 /* ---------- Para los controladores ---------- */
 
@@ -68,6 +75,36 @@ function vista($nombre, $datos = [], $layout = 'publico')
     $contenido = ob_get_clean();
 
     require __DIR__ . '/../vistas/layouts/' . $layout . '.php';
+}
+
+/*
+ * Responde "no encontrado" (404) y corta el controlador.
+ *   mostrar_404();          → página 404 del sitio público
+ *   mostrar_404('admin');   → "No encontramos ese registro" dentro del panel
+ */
+function mostrar_404($layout = 'publico')
+{
+    http_response_code(404);
+
+    if ($layout === 'admin') {
+        vista('admin/404', ['titulo' => 'Registro no encontrado'], 'admin');
+    } else {
+        vista('publico/404', ['titulo' => 'Página no encontrada']);
+    }
+    exit;
+}
+
+/*
+ * Alerta de éxito para las acciones del panel, que en el Parcial 1 son simuladas.
+ * Ej: alerta_simulada('Marca "Bayer" inactivada')
+ *   → ['tipo' => 'exito', 'mensaje' => 'Marca "Bayer" inactivada (simulado: ...)']
+ */
+function alerta_simulada($texto)
+{
+    return [
+        'tipo'    => 'exito',
+        'mensaje' => $texto . ' (simulado: los cambios se guardan a partir del Parcial 2).',
+    ];
 }
 
 
