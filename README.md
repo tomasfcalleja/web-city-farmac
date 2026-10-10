@@ -56,7 +56,7 @@ El código está separado en **modelo** (los datos), **controlador** (qué pasa 
 ├── vistas/
 │   ├── layouts/                    publico, admin (con menú lateral) y auth (login/registro). Únicos con <html>, <head>, header y footer.
 │   ├── parciales/                  Piezas de los layouts: head, header, footer y sidebar-admin.
-│   ├── componentes/                Piezas reutilizables: tarjeta-producto, ranking, alerta, estado-vacio.
+│   ├── componentes/                Piezas reutilizables: tarjeta-producto, ranking, alerta, estado-vacio, selector-estrellas, badge-estado, boton-accion, encabezado-seccion, campo-form, icono.
 │   ├── publico/                    VISTAS del sitio: solo HTML, foreach, if y e(). Nunca llaman al modelo ni leen $_GET.
 │   └── admin/                      VISTAS del panel (mismas reglas).
 ├── assets/                         css/ (input.css → app.css), js/app.js, img/
@@ -121,21 +121,29 @@ No guardan nada: solo muestran el mensaje de éxito. En el Parcial 2 se conectan
 
 ### Panel de administración
 
-| Página | URL | Layout |
+| Página | URL | Parámetros opcionales |
 |---|---|---|
-| Iniciar sesión | `admin/login.php` | auth |
-| Crear cuenta | `admin/registro.php` | auth |
-| Inicio del panel | `admin/index.php` | admin |
-| Productos | `admin/productos.php` | admin |
-| Alta / edición de producto | `admin/producto-form.php` | admin |
-| Categorías | `admin/categorias.php` | admin |
-| Alta / edición de categoría | `admin/categoria-form.php` | admin |
-| Marcas | `admin/marcas.php` | admin |
-| Alta / edición de marca | `admin/marca-form.php` | admin |
-| Comentarios | `admin/comentarios.php` | admin |
-| Usuarios | `admin/usuarios.php` | admin |
-| Alta / edición de usuario | `admin/usuario-form.php` | admin |
-| Perfiles | `admin/perfiles.php` | admin |
-| Alta / edición de perfil | `admin/perfil-form.php` | admin |
+| Iniciar sesión | `admin/login.php` | Al enviar entra directo al panel (simulado, sin validar). |
+| Crear cuenta | `admin/registro.php` | — |
+| Inicio del panel | `admin/index.php` | — |
+| Productos | `admin/productos.php` | `categoria` (principal) y `subcategoria` (de esa principal) |
+| Alta / edición de producto | `admin/producto-form.php` | `id` → modificar (id inexistente → 404) |
+| Categorías | `admin/categorias.php` | `padre` → subcategorías de esa categoría |
+| Alta / edición de categoría | `admin/categoria-form.php` | `id` → modificar; `padre` → nueva subcategoría |
+| Marcas | `admin/marcas.php` | — |
+| Alta / edición de marca | `admin/marca-form.php` | `id` → modificar |
+| Comentarios | `admin/comentarios.php` | `estado` (`aprobados` o `pendientes`) y `producto` |
+| Usuarios | `admin/usuarios.php` | — |
+| Alta / edición de usuario | `admin/usuario-form.php` | `id` → modificar |
+| Perfiles | `admin/perfiles.php` | — |
+| Alta / edición de perfil | `admin/perfil-form.php` | `id` → modificar |
 
-Cada página del panel tiene su vista con el mismo nombre en `vistas/admin/`.
+- Login y registro usan el layout `auth`, sin menú lateral. El resto usa el layout `admin`.
+- Cada página tiene su vista con el mismo nombre en `vistas/admin/`.
+- Los filtros inválidos se ignoran: por ejemplo, una subcategoría que no es de la principal elegida, o `estado=cualquiera`.
+
+**Acciones simuladas.** "Guardar", "Activar/Inactivar" y "Aprobar/Desaprobar" envían por POST al mismo controlador.
+No guardan nada: muestran una alerta que lo aclara. En cada controlador hay un comentario `PARCIAL 2:` que marca dónde irá la lógica real.
+
+**Activos e inactivos.** Las funciones del modelo que terminan en `_admin` devuelven todos los registros.
+Las del sitio público devuelven solo los activos o aprobados.
