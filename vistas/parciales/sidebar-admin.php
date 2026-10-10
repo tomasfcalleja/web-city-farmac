@@ -14,13 +14,13 @@ $menu_panel = [
     'perfiles'    => ['Perfiles', 'admin/perfiles.php'],
 ];
 ?>
-        <aside class="border-b border-borde bg-white md:w-64 md:shrink-0 md:border-r md:border-b-0">
-            <div class="flex items-center justify-between gap-4 p-4 md:p-6">
+        <aside class="border-b border-borde bg-white lg:w-64 lg:shrink-0 lg:border-r lg:border-b-0">
+            <div class="flex items-center justify-between gap-4 p-4 lg:p-6">
                 <a href="<?= url('admin/index.php') ?>" class="text-xl font-extrabold text-bosque-900">
                     City <span class="text-bosque-700">Farmac</span>
                     <span class="chip ml-1 align-middle">Panel</span>
                 </a>
-                <button type="button" class="btn-secundario md:hidden"
+                <button type="button" class="btn-secundario lg:hidden"
                         data-menu aria-controls="menu-panel" aria-expanded="false">
                     <svg aria-hidden="true" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                         <path d="M4 6h16M4 12h16M4 18h16"/>
@@ -30,7 +30,7 @@ $menu_panel = [
             </div>
 
             <nav aria-label="Panel de administración">
-                <ul id="menu-panel" class="hidden space-y-1 px-3 pb-4 md:block">
+                <ul id="menu-panel" class="hidden space-y-1 px-3 pb-4 lg:block">
                     <?php foreach ($menu_panel as $clave => $item): ?>
                         <li>
                             <a href="<?= url($item[1]) ?>" class="item-menu"

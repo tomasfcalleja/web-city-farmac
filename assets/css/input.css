@@ -73,6 +73,41 @@
         @apply rounded-2xl border border-borde bg-white p-6;
     }
 
+    /* Botón o link chico para acciones dentro de tablas (Modificar, Inactivar...) */
+    .btn-chico {
+        @apply inline-flex items-center justify-center rounded-full border border-borde bg-white px-3 py-1.5
+               text-sm font-bold whitespace-nowrap text-bosque-700 transition-colors hover:border-bosque-700 hover:bg-menta-50;
+    }
+
+    /*
+     * Tablas del panel. Uso:
+     *   <div class="tabla-contenedor"><table class="tabla">...</table></div>
+     * El contenedor hace scroll horizontal en pantallas chicas en vez de romper el diseño.
+     */
+    .tabla-contenedor {
+        @apply overflow-x-auto rounded-2xl border border-borde bg-white;
+    }
+
+    .tabla {
+        @apply w-full text-left text-sm;
+
+        & th {
+            @apply border-b border-borde bg-menta-50 px-3 py-3 font-bold whitespace-nowrap text-bosque-900;
+        }
+
+        & td {
+            @apply border-b border-borde px-3 py-3 align-middle;
+        }
+
+        & tbody tr:last-child td {
+            @apply border-b-0;
+        }
+
+        & tbody tr {
+            @apply transition-colors hover:bg-menta-50/60;
+        }
+    }
+
     /* Link de un menú vertical (categorías del listado, menú lateral del panel).
        El activo lleva aria-current y se resalta con fondo menta. */
     .item-menu {

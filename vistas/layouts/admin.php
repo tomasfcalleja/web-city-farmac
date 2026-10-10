@@ -18,10 +18,10 @@ $seccion = $seccion ?? '';
         Saltar al contenido
     </a>
 
-    <div class="md:flex md:min-h-screen">
+    <div class="lg:flex lg:min-h-screen">
 <?php include __DIR__ . '/../parciales/sidebar-admin.php'; ?>
 
-        <main id="contenido" class="min-w-0 flex-1 px-4 py-8 md:px-10">
+        <main id="contenido" class="min-w-0 flex-1 px-4 py-8 md:px-8 lg:px-10">
 <?= $contenido ?>
 
             <footer class="mt-16 border-t border-borde pt-4 text-xs text-gris">
