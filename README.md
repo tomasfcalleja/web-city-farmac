@@ -7,7 +7,8 @@ Trabajo práctico de Producción Web — **Parcial 1**: maquetado navegable con 
 
 - PHP 8.1 o superior (viene incluido en XAMPP y en Laragon).
 - Nada más para verlo funcionar: el CSS ya está compilado en `assets/css/app.css`.
-- Solo si vas a **modificar estilos**: Node.js 18 o superior, con npm (ver [Estilos](#estilos-tailwind-css)).
+- Conexión a internet para la tipografía (Nunito, desde Google Fonts). Sin conexión el sitio funciona igual, con la fuente del sistema.
+- Solo si vas a **modificar estilos**: Node.js 20 o superior, con npm (ver [Estilos](#estilos-tailwind-css)).
 
 ## Cómo levantarlo
 
@@ -26,6 +27,18 @@ php -S localhost:8000
 ```
 
 Y abrí `http://localhost:8000/`.
+
+Si la terminal responde que no reconoce `php`, es porque no está en el PATH. Usá la ruta completa al `php.exe` de tu instalación:
+
+```powershell
+# Laragon (la carpeta cambia según la versión de PHP instalada)
+& "C:\laragon\bin\php\php-8.3.30-Win32-vs16-x64\php.exe" -S localhost:8000
+
+# XAMPP
+& "C:\xampp\php\php.exe" -S localhost:8000
+```
+
+En Laragon también podés agregarlo al PATH desde **Menu → Tools → Path → Add Laragon to Path** (hay que reabrir la terminal).
 
 ## Ruta base (BASE_URL)
 
@@ -50,7 +63,7 @@ El código está separado en **modelo** (los datos), **controlador** (qué pasa 
 ├── admin/*.php                     CONTROLADORES del panel (mismas reglas).
 ├── config.php                      BASE_URL y nombre del sitio; carga helpers y modelos (cada controlador hace un solo require).
 ├── app/
-│   ├── helpers.php                 url(), e(), precio() y vista(), que arma la página: vista + layout.
+│   ├── helpers.php                 Funciones de ayuda (ver Helpers): url(), e(), vista(), que arma la página: vista + layout, y más.
 │   └── modelos/                    MODELOS, uno por entidad, con las funciones obtener_*(). Nunca imprimen HTML ni leen $_GET.
 ├── datos/                          Datos de ejemplo: un archivo por "tabla" que devuelve un array. Solo los leen los modelos.
 ├── vistas/
@@ -75,6 +88,24 @@ Así viaja una petición, por ejemplo `producto.php?id=4`:
 4. **`vista()`:**
    - arma el HTML de `vistas/publico/producto.php`;
    - lo pone dentro de `vistas/layouts/publico.php`, que agrega `<head>`, header y footer.
+
+## Helpers
+
+Las funciones de ayuda están en `app/helpers.php` y quedan disponibles en todo el proyecto al cargar `config.php`.
+
+| Función | Para qué sirve | Quién la usa |
+|---|---|---|
+| `url($ruta)` | Arma una URL desde la raíz del proyecto, con `BASE_URL` adelante | Vistas |
+| `e($texto)` | Escapa texto antes de mostrarlo en el HTML | Vistas |
+| `numero($numero, $decimales)` | Formato argentino: `4.5` → `4,5` | Vistas |
+| `precio($numero)` | Precio en pesos: `12345.5` → `$ 12.345,50` | Vistas |
+| `fecha($fecha)` | `2026-08-12` → `12/08/2026` | Vistas |
+| `ocultar_email($email)` | `laura.gomez@mail.com` → `la***@mail.com` | Vistas |
+| `recortar($texto, $largo)` | Acorta un texto largo y agrega `…` | Vistas |
+| `vista($nombre, $datos, $layout)` | Arma la página: la vista adentro de un layout (`publico` por defecto) | Controladores |
+| `mostrar_404($layout)` | Responde 404, muestra la vista del sitio o la del panel (`'admin'`) y corta el controlador | Controladores |
+| `alerta_simulada($texto)` | Alerta de éxito de las acciones simuladas del panel | Controladores |
+| `buscar_por_id($lista, $id)` | Busca un elemento por su id, o devuelve `null` | Modelos |
 
 ## Estilos (Tailwind CSS)
 
@@ -116,6 +147,9 @@ Las URLs son relativas a la ruta base (por ejemplo `http://localhost:8000/`).
 
 Un valor inválido se ignora: `orden=cualquiera` vuelve a `destacados`, y `categoria=abc` significa "sin filtro".
 
+**Componentes (temporal).** `componentes.php` es una guía de estilos con todos los componentes juntos.
+Hay que borrarla antes de la entrega final, junto con `vistas/publico/componentes.php`.
+
 **Formularios simulados.** El comentario del detalle y el formulario de contacto envían por POST a la misma página.
 No guardan nada: solo muestran el mensaje de éxito. En el Parcial 2 se conectan a la base de datos.
 
@@ -127,7 +161,7 @@ No guardan nada: solo muestran el mensaje de éxito. En el Parcial 2 se conectan
 | Crear cuenta | `admin/registro.php` | — |
 | Inicio del panel | `admin/index.php` | — |
 | Productos | `admin/productos.php` | `categoria` (principal) y `subcategoria` (de esa principal) |
-| Alta / edición de producto | `admin/producto-form.php` | `id` → modificar (id inexistente → 404) |
+| Alta / edición de producto | `admin/producto-form.php` | `id` → modificar |
 | Categorías | `admin/categorias.php` | `padre` → subcategorías de esa categoría |
 | Alta / edición de categoría | `admin/categoria-form.php` | `id` → modificar; `padre` → nueva subcategoría |
 | Marcas | `admin/marcas.php` | — |
@@ -140,6 +174,7 @@ No guardan nada: solo muestran el mensaje de éxito. En el Parcial 2 se conectan
 
 - Login y registro usan el layout `auth`, sin menú lateral. El resto usa el layout `admin`.
 - Cada página tiene su vista con el mismo nombre en `vistas/admin/`.
+- En los cinco formularios, un `id` que no existe responde 404 dentro del panel, con la vista `vistas/admin/404.php`.
 - Los filtros inválidos se ignoran: por ejemplo, una subcategoría que no es de la principal elegida, o `estado=cualquiera`.
 
 **Acciones simuladas.** "Guardar", "Activar/Inactivar" y "Aprobar/Desaprobar" envían por POST al mismo controlador.
