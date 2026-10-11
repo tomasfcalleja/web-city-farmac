@@ -85,7 +85,7 @@
      * El contenedor hace scroll horizontal en pantallas chicas en vez de romper el diseño.
      */
     .tabla-contenedor {
-        @apply overflow-x-auto rounded-2xl border border-borde bg-white;
+        @apply relative overflow-x-auto rounded-2xl border border-borde bg-white;
     }
 
     .tabla {
